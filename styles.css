@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+   
+}
+
+.content{
+    display:grid;
+}
+
+.header{
+    display: grid;
+    justify-content: center;
+}
+
+
+#gameBoard {
+    outline: 3px solid red;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-self:center;
+    max-width: 500px;
+    justify-self: center;
+    margin-top: 20%;
+
+    
+
+}
+
+.cell{
+    outline: 1px solid black;
+    min-width: 60px;
+    min-height: 60px;
+}
