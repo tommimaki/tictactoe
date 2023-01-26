@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TicTacToe</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    
-<div class="content">
-    
-    
-            <div class="header">
-                <h1>TicTacToe</h1>
-                </div>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="header">
+        <h1>TicTacToe</h1>
+      </div>
 
+      <div class="winModal">
+        <h1> test</h1>
+        <button id="resetBtn" class="btn">Play Again</button>
+      </div>
 
-                <div class="formDiv">
-                <form id="playerForm" autocomplete="off">
-                       <div class="inputfield">
-                        <label>Player 1 name?</label>
-                        <input type="text" 
-                        name=player1Name
-                        />
-                       </div> 
-                    <div class="inputField">
-                        <label>Player2  name?</label>
-                        <input type="text" 
-                        name=player2Name
-                        />
-                    </div>
-                    <button type="submit" class="startButton">Start Game</button>
-                </form>
+      <div class="modal">
+        <div class="formDiv">
+          <form id="playerForm" autocomplete="off">
+            <div class="inputfield">
+              <label>Player 1 name?</label>
+              <input type="text" name="player1Name" required />
+            </div>
+            <div class="inputField">
+              <label>Player2 name?</label>
+              <input type="text" name="player2Name" required />
+            </div>
+            <div class="inputField">
+              <label> human vs human </label>
+              <input type="radio" name="choice" value="1" />
+            </div>
+            <div class="inputField">
+              <label> human vs AI </label>
+              <input type="radio" name="choice" value="=2" />
+            </div>
 
-                <button id="resetBtn" class="btn"> reset game</button>
+            <button type="submit" class="startButton">Start Game</button>
+          </form>
+        </div>
+      </div>
 
-
-                </div>
-        
-
-            <div id="gameBoard">
-                <div class="cell" id="0"></div>
-                <div class="cell" id="1"></div>
-                <div class="cell" id="2"></div>
-                <div class="cell" id="3"></div>
-                <div class="cell" id="4"></div>
-                <div class="cell" id="5"></div>
-                <div class="cell" id="6"></div>
-                <div class="cell" id="7"></div>
-                <div class="cell" id="8"></div>
-            </div> 
-            
-</div>
-
-</body>
-<script src="scripts.js"></script>
+      <div id="gameBoard">
+        <div class="cell" id="0"></div>
+        <div class="cell" id="1"></div>
+        <div class="cell" id="2"></div>
+        <div class="cell" id="3"></div>
+        <div class="cell" id="4"></div>
+        <div class="cell" id="5"></div>
+        <div class="cell" id="6"></div>
+        <div class="cell" id="7"></div>
+        <div class="cell" id="8"></div>
+      </div>
+    </div>
+  </body>
+  <script src="scripts.js"></script>
 </html>

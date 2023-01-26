@@ -12,7 +12,8 @@ const winningConditions = [
 
 const resetBtn = document.querySelector('#resetBtn')
 
-
+const formModal = document.querySelector('.modal')
+const winModal = document.querySelector('.winModal')
 
 const form = document.querySelector("#playerForm");
 form.addEventListener("submit", (e) => {
@@ -22,6 +23,7 @@ form.addEventListener("submit", (e) => {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData);
   initializeGame(data);
+  formModal.style.display = "none";
   form.reset();
 });
 
@@ -32,7 +34,6 @@ const gameboardEvents = (data) => {
 
   boxes.forEach((box) => {
     box.addEventListener("click", (event) => {
-      let boxId = box.id;
       playMove(event.target, data);
     });
   });
@@ -51,6 +52,8 @@ const gameboardEvents = (data) => {
 const setVariables = (data) => {
   data.player1Mark = "X";
   data.player2Mark = "O";
+  data.player1Score= 0;
+  data.player2Score= 0;
   data.currentPlayer = "X";
   data.round = 0;
   data.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -81,16 +84,30 @@ const playMove = (box, data) => {
   // sets player mark to board, for checking winning combinations
   data.board[box.id] = data.currentPlayer;
   //check winCon
-  if(checkWinner(data, data.currentPlayer) == true ){   
-   
-  
-    if(data.currentPlayer == 'X' ? console.log(`${data.player1Name}  won `) :  console.log(`${data.player2Name} won`) )
-   
+
+    if(checkWinner(data, data.currentPlayer) == true ){
+    if(data.currentPlayer=='X'){
+      winModal.style.display = "block";
+
+      winModal.textContent = `${data.player1Name}  won `
+      resetBtn.style.display='block';
+      console.log(`${data.player1Name}  won `)
+      data.player1Score++;
+      console.log(data.player1Score++);
+      data.gameOver=true;
+    } else {
+      winModal.style.display = "block";
+      resetBtn.style.display='block';
+      winModal.textContent = `${data.player2Name}  won `
+      console.log(`${data.player2Name} won`)
+      data.gameOver=true;
+    }
+  }
        //TODO: reset board
-       data.gameOver=true;
+      //  data.gameOver=true;
        console.log(data.gameOver)
 
-      }
+      
   // change player after turn
   changePlayer(data);
   
