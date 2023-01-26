@@ -9,16 +9,20 @@ const winningConditions = [
   [2, 4, 6],
 ];
 
+
+const resetBtn = document.querySelector('#resetBtn')
+
+
+
 const form = document.querySelector("#playerForm");
 form.addEventListener("submit", (e) => {
   //prevent page reload
   e.preventDefault();
   //initializing user data from form
-
   const formData = new FormData(form);
   const data = Object.fromEntries(formData);
-
   initializeGame(data);
+  form.reset();
 });
 
 const gameboardEvents = (data) => {
@@ -29,23 +33,29 @@ const gameboardEvents = (data) => {
   boxes.forEach((box) => {
     box.addEventListener("click", (event) => {
       let boxId = box.id;
-      //   cells[box.id].textContent='X';
       playMove(event.target, data);
     });
   });
 
-  //  const playMove = (e,data) => {
-  //     console.log(s)
+  // resetgameBtn eventListener
+  resetBtn.addEventListener('click', () => {
+    boxes.forEach((box) => {
+      box.textContent=''
+    })
+    setVariables(data)
+  });
 
-  //  }
+  
 };
 
 const setVariables = (data) => {
   data.player1Mark = "X";
   data.player2Mark = "O";
   data.currentPlayer = "X";
-  data.round = "0";
+  data.round = 0;
   data.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  data.gameOver = false;
+  console.log(data)
 };
 
 const initializeGame = (data) => {
@@ -57,35 +67,56 @@ const initializeGame = (data) => {
 // draw the mark of current player if not, then check winCondition,
 // if game continues, switch current player
 const playMove = (box, data) => {
+  if(data.gameOver){
+    return;
+  }
+  data.round++;
   //if box has mark, do nopthing
   if (data.board[box.id] === "X" || data.board[box.id] === "O") {
     return;
   }
-
   const cells = document.getElementsByClassName("cell");
   // adds playermark as textcontent to the board
   cells[box.id].textContent = data.currentPlayer;
   // sets player mark to board, for checking winning combinations
   data.board[box.id] = data.currentPlayer;
   //check winCon
-  checkWinner(data, data.currentPlayer);
+  if(checkWinner(data, data.currentPlayer) == true ){   
+   
+  
+    if(data.currentPlayer == 'X' ? console.log(`${data.player1Name}  won `) :  console.log(`${data.player2Name} won`) )
+   
+       //TODO: reset board
+       data.gameOver=true;
+       console.log(data.gameOver)
+
+      }
   // change player after turn
   changePlayer(data);
+  
+// checks if game is a tie;
+  if(data.round === 9 && checkWinner(data, data.currentPlayer) == false) {
+    console.log('tie')
+    data.gameOver=true;
+    //TODO: reset board
+  }
 };
+
 
 const changePlayer = (data) => {
   data.currentPlayer = data.currentPlayer === "X" ? "O" : "X";
 };
 
+// function takes data and currentplayer as parameters, checks winner, returns true if move resulted in win.
 const checkWinner = (data, player) => {
   let result = false;
   winningConditions.forEach((variation) => {
     if (
+      // comparing wincondition arrays to player marks on board
       data.board[variation[0]] === player &&
       data.board[variation[1]] === player &&
       data.board[variation[2]] === player
     ) {
-      console.log(`${player} wins`);
       result = true;
     }
   });
