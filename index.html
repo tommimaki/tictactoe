@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TicTacToe</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="content">
@@ -14,34 +17,38 @@
       </div>
 
       <div class="winModal">
-        <button id="playAgainBtn" class="btn">Play Again</button>
-        <button id="resetBtn" class="btn"> Reset Game</button>
-      </div>
-
-      <div class="modal">
-        <div class="formDiv">
-          <form id="playerForm" autocomplete="off">
-            <div class="inputfield">
-              <label>Player 1 name?</label>
-              <input type="text" name="player1Name" required />
-            </div>
-            <div class="inputField">
-              <label>Player2 name?</label>
-              <input type="text" name="player2Name" required />
-            </div>
-            <div class="inputField">
-              <label> human vs human </label>
-              <input type="radio" name="choice" value="1" />
-            </div>
-            <div class="inputField">
-              <label> human vs AI </label>
-              <input type="radio" name="choice" value="=2" />
-            </div>
-
-            <button type="submit" class="startButton">Start Game</button>
-          </form>
+        
+        <div class="buttons">
+          <button id="playAgainBtn" class="btn">Play Again</button>
+          <button id="resetBtn" class="btn"> Reset Game</button>
         </div>
       </div>
+
+      
+        <div class="modal">
+          <div class="formDiv">
+            <form id="playerForm" autocomplete="off">
+              <div class="inputfield">
+                <label>Player 1 name?</label>
+                <input type="text" name="player1Name" required />
+              </div>
+              <div class="inputField">
+                <label>Player 2 name?</label>
+                <input type="text" name="player2Name" required />
+              </div>
+              <div class="inputFieldRadio">
+                <label> human vs human </label>
+                <input class="radioB" type="radio" name="choice" value="1" />
+              </div>
+              <div class="inputFieldRadio">
+                <label> human vs AI </label>
+                <input class="radioB" type="radio" name="choice" value="=2" />
+              </div>
+              <button type="submit" class="startButton">Start Game</button>
+            </form>
+          </div>
+        </div>
+
 
       <div id="gameBoard">
         <div class="cell" id="0"></div>

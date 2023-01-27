@@ -1,63 +1,130 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Rock Salt', cursive;
+    
    
 }
 
+body{
+    background: rgb(154,212,212);
+background: linear-gradient(90deg, rgba(154,212,212,1) 0%, rgba(252,252,252,1) 56%, rgba(218,224,232,1) 100%);
+}
 .content{
+    
     display:grid;
 }
-
 .header{
     display: grid;
     justify-content: center;
+    margin-top: 30px;
+    font-size: 24px;
+    text-decoration: underline;
 }
-
-
 #gameBoard {
-    outline: 3px solid red;
+    border: 3px solid Black;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    align-self:center;
-    max-width: 500px;
     justify-self: center;
-    margin-top: 20%;
-
-    
-
+    margin-top: 15%;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .cell{
     outline: 1px solid black;
-    min-width: 60px;
-    min-height: 60px;
+    min-width: 80px;
+    min-height: 80px;
+    font-family: 'Rock Salt', cursive;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    
 }
+/* .formContainer{
+   display: grid;
+    border: 5px blue solid;
+    margin
+
+} */
+
 
 .modal {
-    display: block; 
-    position: fixed; /* Stay in place */
+    border: 4px ridge black;
+    display: grid; 
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    margin-top: -400px; /* Negative half of height. */
+    margin-left: -250px; 
     z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 500px; /* Full width */
+    height: 800px; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(153, 170, 187, 0.9); /* Black w/ opacity */
   }
+ form{
+    display:grid;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+ }
+ input{
+    width: 200px;
+    display: grid;
+    grid-auto-flow: column;
+    border: 2px solid black;
+ }
+
+ .radioB{
+    cursor: pointer;
+ }
+
+ .startButton{
+    border: 2px solid black;
+    cursor: pointer;
+ }
   
 .winModal {
-
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
+    top: 50%;
+    left: 50%;
+    margin-top: -400px; /* Negative half of height. */
+    margin-left: -250px; 
     z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 500px; /* Full width */
+    height: 800px; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(127, 19, 19, 0.4); /* Black w/ opacity */
+    background-color: rgba(153, 170, 187, .95); /* Black w/ opacity */
+    grid-template-areas: 
+    'winnerText'
+    'buttons';
+    grid-template-rows: 1fr 3fr;
+
   }
   
+
+  .buttons{
+    grid-area: buttons;
+
+    display: grid;
+    width: 200px;
+    align-self: flex-start;
+    justify-self: center;
+    gap: 10px;
+  }
+  .winnerText{
+    grid-area: winnerText;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+
+    text-align: center;
+    font-size: 40px;
+
+  }

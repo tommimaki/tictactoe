@@ -11,10 +11,10 @@ const winningConditions = [
 
 const resetBtn = document.querySelector("#resetBtn");
 const playAgainBtn = document.querySelector("#playAgainBtn");
-
 const formModal = document.querySelector(".modal");
 const winModal = document.querySelector(".winModal");
 const winnerText = document.createElement("h2");
+winnerText.classList.add('winnerText')
 
 const form = document.querySelector("#playerForm");
 form.addEventListener("submit", (e) => {
@@ -38,7 +38,6 @@ const gameboardEvents = (data) => {
     });
   });
 
-  // resetgameBtn eventListener
   playAgainBtn.addEventListener("click", () => {
     boxes.forEach((box) => {
       box.textContent = "";
@@ -52,7 +51,7 @@ const gameboardEvents = (data) => {
       box.textContent = "";
     });
     winModal.style.display = "none";
-    formModal.style.display = "block";
+    formModal.style.display = "grid";
   });
 };
 
@@ -72,55 +71,45 @@ const initializeGame = (data) => {
   gameboardEvents(data);
 };
 
-// check current player, check if clicked box has mark,
-// draw the mark of current player if not, then check winCondition,
-// if game continues, switch current player
+
 const playMove = (box, data) => {
   if (data.gameOver) {
     return;
   }
   data.round++;
-  //if box has mark, do nopthing
+  //if box already has mark, do nothing
   if (data.board[box.id] === "X" || data.board[box.id] === "O") {
     return;
   }
   const cells = document.getElementsByClassName("cell");
-  // adds playermark as textcontent to the board
+  // adds playermark as textcontent to the board for player to see
   cells[box.id].textContent = data.currentPlayer;
-  // sets player mark to board, for checking winning combinations
+  // sets player mark to data.board, for checking winning combinations
   data.board[box.id] = data.currentPlayer;
-  //check winCon
+
     // checks if game is a tie;
     if (data.round === 9 && checkWinner(data, data.currentPlayer) == false) {
-
       winnerText.innerHTML = 'tie, try again!';
       winModal.appendChild(winnerText);
-      winModal.style.display = "block";
+      winModal.style.display = "grid";
       data.gameOver = true;
-      //TODO: reset board
     }
-
+    //if game not tie checks for winner
   if (checkWinner(data, data.currentPlayer) == true) {
     if (data.currentPlayer == "X") {
       winnerText.innerHTML = `${data.player1Name}  won `;
       winModal.appendChild(winnerText);
-      winModal.style.display = "block";
-      // console.log(`${data.player1Name}  won `)
+      winModal.style.display = "grid";
       data.gameOver = true;
     } else {
       winnerText.innerHTML = `${data.player2Name}  won `;
       winModal.appendChild(winnerText);
-      winModal.style.display = "block";
+      winModal.style.display = "grid";
       data.gameOver = true;
     }
   }
-
-  console.log(data.gameOver);
-
-  // change player after turn
+  // change player after turn if no draw, or winner
   changePlayer(data);
-
-
 };
 
 const changePlayer = (data) => {
