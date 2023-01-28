@@ -9,12 +9,13 @@ const winningConditions = [
   [2, 4, 6],
 ];
 
+const cells = document.getElementsByClassName("cell");
 const resetBtn = document.querySelector("#resetBtn");
 const playAgainBtn = document.querySelector("#playAgainBtn");
 const formModal = document.querySelector(".modal");
 const winModal = document.querySelector(".winModal");
 const winnerText = document.createElement("h2");
-winnerText.classList.add('winnerText')
+winnerText.classList.add("winnerText");
 
 const form = document.querySelector("#playerForm");
 form.addEventListener("submit", (e) => {
@@ -71,49 +72,49 @@ const initializeGame = (data) => {
   gameboardEvents(data);
 };
 
-
 const playMove = (box, data) => {
   if (data.gameOver) {
     return;
   }
   data.round++;
+
   //if box already has mark, do nothing
   if (data.board[box.id] === "X" || data.board[box.id] === "O") {
     return;
   }
+
   const cells = document.getElementsByClassName("cell");
   // adds playermark as textcontent to the board for player to see
   cells[box.id].textContent = data.currentPlayer;
   // sets player mark to data.board, for checking winning combinations
   data.board[box.id] = data.currentPlayer;
 
-    // checks if game is a tie;
-    if (data.round === 9 && checkWinner(data, data.currentPlayer) == false) {
-      winnerText.innerHTML = 'tie, try again!';
-      winModal.appendChild(winnerText);
-      winModal.style.display = "grid";
-      data.gameOver = true;
-    }
-    //if game not tie checks for winner
-  if (checkWinner(data, data.currentPlayer) == true) {
-    if (data.currentPlayer == "X") {
-      winnerText.innerHTML = `${data.player1Name}  won `;
-      winModal.appendChild(winnerText);
-      winModal.style.display = "grid";
-      data.gameOver = true;
-    } else {
-      winnerText.innerHTML = `${data.player2Name}  won `;
-      winModal.appendChild(winnerText);
-      winModal.style.display = "grid";
-      data.gameOver = true;
-    }
+  checkWinner(data, data.currentPlayer);
+  // checks if game is a tie;
+  setTimeout(()=>{
+    checkTie(data);
+  },"20")
+
+  // if player has chosen AI, play aiMove, otherwise change turn for another player
+  if (data.choice == 2) {
+    changePlayer(data);
+    aiMove(data);
+  } else {
+    changePlayer(data);
   }
-  // change player after turn if no draw, or winner
-  changePlayer(data);
 };
 
 const changePlayer = (data) => {
   data.currentPlayer = data.currentPlayer === "X" ? "O" : "X";
+};
+
+const checkTie = (data) => {
+  if (data.round === 9 && checkWinner(data, data.currentPlayer) == false) {
+    winnerText.innerHTML = "tie, try again!";
+    winModal.appendChild(winnerText);
+    winModal.style.display = "grid";
+    data.gameOver = true;
+  }
 };
 
 // function takes data and currentplayer as parameters, checks winner, returns true if move resulted in win.
@@ -129,5 +130,60 @@ const checkWinner = (data, player) => {
       result = true;
     }
   });
-  return result;
+
+  // return result;
+  if (result == true) {
+    if (data.currentPlayer == "X") {
+      winnerText.innerHTML = `${data.player1Name}  won `;
+      winModal.appendChild(winnerText);
+      winModal.style.display = "grid";
+      data.gameOver = true;
+      return true;
+    } else if (data.currentPlayer == "O") {
+      winnerText.innerHTML = `${data.player2Name}  won `;
+      winModal.appendChild(winnerText);
+      winModal.style.display = "grid";
+      data.gameOver = true;
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
+// TODO:// check against winconditions, if wincon would make true place mark, if not put next to own, if not put random
+const aiMove = (data) => {
+
+  // delay for ai moves, looks better if mark doesn't appear right away
+  setTimeout(() => {
+
+  if (data.gameOver) {
+    return;
+  }
+ 
+  
+  data.round++;
+  let availableMoves = [];
+  data.board.forEach((box) => {
+    if (box !== "X" && box !== "O") {
+      availableMoves.push(box);
+    }
+  });
+
+  // random placing for AI's marker
+  const aiMark = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+  //set mark to html gameboard, and array
+  cells[aiMark].textContent = data.currentPlayer;
+  data.board[aiMark] = data.currentPlayer;
+
+  checkWinner(data, data.currentPlayer);
+  setTimeout(()=>{
+    checkTie(data);
+  },"20")
+
+  changePlayer(data);
+
+},"350")
+
+
 };

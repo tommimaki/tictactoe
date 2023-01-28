@@ -8,7 +8,7 @@
 
 body{
     background: rgb(154,212,212);
-background: linear-gradient(90deg, rgba(154,212,212,1) 0%, rgba(252,252,252,1) 56%, rgba(218,224,232,1) 100%);
+background: linear-gradient(90deg, rgb(200, 151, 188) 0%, rgba(252,252,252,1) 56%, rgba(218,224,232,1) 100%);
 }
 .content{
     
@@ -31,17 +31,24 @@ background: linear-gradient(90deg, rgba(154,212,212,1) 0%, rgba(252,252,252,1) 5
     cursor: pointer;
     text-align: center;
     text-transform: uppercase;
+    
 }
+.cell:nth-child(odd){
+    background-color: rgb(232, 243, 243);
+}
+.cell:nth-child(even){
+    background-color: rgb(227, 224, 224);
+}
+
 
 .cell{
     outline: 1px solid black;
-    min-width: 80px;
-    min-height: 80px;
+    min-width: 100px;
+    min-height: 100px;
     font-family: 'Rock Salt', cursive;
     text-align: center;
-    font-size: larger;
+    font-size: 40px;
     font-weight: bold;
-    
 }
 /* .formContainer{
    display: grid;
@@ -64,7 +71,7 @@ background: linear-gradient(90deg, rgba(154,212,212,1) 0%, rgba(252,252,252,1) 5
     height: 800px; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(153, 170, 187, 0.9); /* Black w/ opacity */
+    background-color: rgba(153, 170, 187, 1); /* Black w/ opacity */
   }
  form{
     display:grid;
@@ -87,8 +94,17 @@ background: linear-gradient(90deg, rgba(154,212,212,1) 0%, rgba(252,252,252,1) 5
     border: 2px solid black;
     cursor: pointer;
  }
+ @keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity: 1
+    }
+ }
   
 .winModal {
+    animation: fadeIn 0.7s;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     top: 50%;
@@ -96,8 +112,8 @@ background: linear-gradient(90deg, rgba(154,212,212,1) 0%, rgba(252,252,252,1) 5
     margin-top: -400px; /* Negative half of height. */
     margin-left: -250px; 
     z-index: 1; /* Sit on top */
-    width: 500px; /* Full width */
-    height: 800px; /* Full height */
+    width: 500px; 
+    height: 800px; 
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(153, 170, 187, .95); /* Black w/ opacity */
